@@ -1,0 +1,56 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>WebAssembly JavaScript runner</title>
+        <meta name="description" content="HTML runner for JavaScript tests">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="../js/lib.js"></script>
+        <script src="../js/wasm-constants.js"></script>
+        <script src="../js/wasm-module-builder.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <p id="status">Please wait while tests are running...</p>
+
+        <ul id="results"></ul>
+
+        <script>
+            var $ = document.querySelector.bind(document);
+            var $status = $('#status');
+            var $results = $('#results');
+
+            var successes = 0;
+            var errors = 0;
+
+            function addSuccess(msg) {
+                $results.innerText += `\nSUCCESS: ${msg}`;
+                successes++;
+            }
+            function addFailure(msg) {
+                $results.innerText += `\nFAIL: ${msg}`;
+                errors++;
+            }
+        </script>
+
+        <script src="../js/jsapi.js"></script>
+
+        <script>
+            var total = successes + errors;
+
+            $status.innerText = `Done!
+Successes: ${successes} / ${total}.
+Errors: ${errors} / ${total}.
+`;
+        </script>
+    </body>
+</html>
