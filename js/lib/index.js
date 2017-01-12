@@ -52,3 +52,7 @@ function assertErrorMessage(f, ctor, test) {
     }
     assert(false, "expected exception " + ctor.name + ", no exception thrown");
 };
+
+function ToBuffer(builder) {
+    return new Uint8Array(builder.toBuffer());
+}

@@ -16,10 +16,6 @@
 
 const WasmPage = 64 * 1024;
 
-function ToBuffer(builder) {
-    return new Uint8Array(builder.toBuffer());
-}
-
 const emptyModuleBinary = ToBuffer(new WasmModuleBuilder());
 
 const importingModuleBinary = (() => {
