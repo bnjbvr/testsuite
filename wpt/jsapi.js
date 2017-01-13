@@ -635,6 +635,7 @@ test(() => {
     assert_equals(compile.name, "compile");
 }, "'WebAssembly.compile' function");
 
+var num_tests = 1;
 function assertCompileError(args, err, msg) {
     promise_test(() => {
         return WebAssembly.compile(...args)
@@ -647,7 +648,7 @@ function assertCompileError(args, err, msg) {
             assert_equals(Boolean(error.message.match(msg)), true);
             return Promise.resolve()
         });
-    });
+    }, `assertCompileError ${num_tests++}`);
 }
 
 assertCompileError([], TypeError, /requires more than 0 arguments/);
@@ -657,13 +658,14 @@ assertCompileError([{}], TypeError, /first argument must be an ArrayBuffer or ty
 assertCompileError([new Uint8Array()], CompileError, /failed to match magic number/);
 assertCompileError([new ArrayBuffer()], CompileError, /failed to match magic number/);
 
+num_tests = 1;
 function assertCompileSuccess(bytes) {
     promise_test(() => {
         return WebAssembly.compile(bytes)
         .then(module => {
             assert_equals(module instanceof Module, true);
         });
-    }, "assertCompileSuccess");
+    }, `assertCompileSuccess ${num_tests++}`);
 }
 
 assertCompileSuccess(emptyModuleBinary);
