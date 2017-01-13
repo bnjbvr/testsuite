@@ -80,6 +80,10 @@ if (!fileName.endsWith('.js')) {
 console.log(`Running ${fileName}`);
 
 load(fileName);
+
+// XXX needs to find a way to know what's the name of the function. Maybe we
+// could make it a convention that the file contains a function named run(), or
+// launch_test().
 testJSAPI();
 
 postRun();
